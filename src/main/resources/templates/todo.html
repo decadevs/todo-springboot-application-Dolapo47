@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>To-dos</title>
+    <th:block th:include="layout/header"></th:block>
+</head>
+<body>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(todo)}">
+        <h2>All To-dos</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Todo Title</th>
+                <th>Todo Description</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="t : ${todo}">
+                <td th:text="${t.id}">Id</td>
+                <td th:text="${t.title}">Title</td>
+                <td th:text="${t.description}">Description</td>
+                <td th:text="${t.status}">Description</td>
+                <td><a th:href="${'/todo/edit/' + t.id}" class="btn btn-primary">Edit</a></td>
+                <td><a th:href="${'/todo/delete/' + t.id}" class="btn btn-danger">Delete</a></td>
+
+            </tr>
+        </table>
+    </div>
+    <div class="container" th:unless="${not #lists.isEmpty(todo)}">
+        <h2>To-do list is empty</h2>
+    </div>
+</div>
+
+</body>
+</html>

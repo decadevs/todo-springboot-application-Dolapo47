@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 @Entity
 //@Table(name = "todos")
@@ -28,19 +29,21 @@ public class Todo {
     private String status;
 
     @CreationTimestamp
-//    @Column(name = "created_at", nullable = false)
-    private Time createdAt;
+    @Column(nullable = false)
+    private Timestamp createdAt;
 
     @UpdateTimestamp
-    private Time updatedAt;
+    @Column(nullable = false)
+    private Timestamp updatedAt;
 
     public Todo() {
     }
 
-    public Todo(String title, String description) {
+    public Todo(String title, String description, Timestamp createdAt) {
         this.title = title;
         this.description = description;
         this.status = "pending";
+        this.createdAt = createdAt;
     }
 
     public Integer getId() {
@@ -75,19 +78,19 @@ public class Todo {
         this.status = status;
     }
 
-    public Time getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Time createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Time getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Time updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
